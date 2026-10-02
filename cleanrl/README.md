@@ -19,7 +19,7 @@ This folder contains the [Clean RL](https://github.com/vwxyzjn/cleanrl) implemen
 # assume the current directory is the root of this repository
 docker run --rm -it --gpus all --ipc=host -v ${PWD}:/app nvcr.io/nvidia/pytorch:20.12-py3
 # inside the docker container, run:
-cd /app
+cd /app/cleanrl
 ```
 
 - Install the dependencies using the following commands:

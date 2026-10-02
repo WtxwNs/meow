@@ -8,10 +8,24 @@ This repository contains the code implementation of the experiments presented in
 ---
 
 ## Directory Structure
-- Use the code in [meow/toy](/toy) to reproduce the experimental results presented in **Section 4.1** of [our paper](https://arxiv.org/abs/2405.13629).
-- Use the code in [meow/cleanrl](/cleanrl) to reproduce the experimental results presented in **Section 4.2** of [our paper](https://arxiv.org/abs/2405.13629).
-- Use the code in [meow/skrl](/skrl) to reproduce the experimental results presented in **Section 4.3** of [our paper](https://arxiv.org/abs/2405.13629).
-- Use the code in [meow/plot](/plot) to reproduce the figures presented in [our paper](https://arxiv.org/abs/2405.13629).
+- Use the code in [meow/toy](toy/) to reproduce the experimental results presented in **Section 4.1** of [our paper](https://arxiv.org/abs/2405.13629).
+- Use the code in [meow/cleanrl](cleanrl/) to reproduce the experimental results presented in **Section 4.2** of [our paper](https://arxiv.org/abs/2405.13629).
+- Use the code in [meow/skrl](skrl/) to reproduce the experimental results presented in **Section 4.3** of [our paper](https://arxiv.org/abs/2405.13629).
+- Use the code in [meow/plot](plot/) to reproduce the figures presented in [our paper](https://arxiv.org/abs/2405.13629).
+
+---
+
+## Safe Reproduction and Regression Checks
+
+These are research experiments with frozen third-party dependencies. Run them in
+an isolated environment, and do not expose bundled development or logging servers
+to untrusted networks. The checkpoint-loading entrypoints use pickle-based PyTorch
+serialization: load only checkpoints you created or obtained from a trusted source,
+since loading an untrusted checkpoint can execute code in the experiment environment.
+
+See [the focused CPU regression tests](tests/README.md) for lightweight checks that
+do not require a simulator or GPU. These checks do not establish that every bundled
+dependency is free of vulnerabilities or reproduce the full training results.
 
 ---
 

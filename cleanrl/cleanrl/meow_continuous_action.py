@@ -299,6 +299,8 @@ def train(args=None):
         a_optimizer = optim.Adam([log_alpha], lr=args.q_lr)
     else:
         alpha = args.alpha
+    # Q and V are scaled by each policy's temperature, not the local scalar.
+    policy.alpha = policy_target.alpha = alpha
 
     envs.single_observation_space.dtype = np.float32
     rb = ReplayBuffer(
@@ -379,6 +381,7 @@ def train(args=None):
                         alpha_loss.backward()
                         a_optimizer.step()
                         alpha = log_alpha.exp().item()
+                        policy.alpha = policy_target.alpha = alpha
 
             # update the target networks
             if global_step % args.target_network_frequency == 0:
