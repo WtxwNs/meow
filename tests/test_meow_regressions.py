@@ -126,6 +126,25 @@ class ToyCheckpointTests(unittest.TestCase):
         self.assertEqual([Path(call.args[1]).name for call in save.call_args_list], ["last.pt"])
 
 
+class ToyPlotDeviceTests(unittest.TestCase):
+    def test_value_plot_uses_the_policy_device(self):
+        pyplot = module("matplotlib.pyplot", pcolormesh=Mock(), xlabel=Mock(),
+                        ylabel=Mock(), savefig=Mock())
+        utils = load_source("toy_plot_regression", "toy/modules/utils.py", {
+            "matplotlib": module("matplotlib", pyplot=pyplot),
+            "matplotlib.pyplot": pyplot,
+            "gymnasium": module("gymnasium"),
+        })
+        observed_devices = []
+        def get_v(obs):
+            observed_devices.append(obs.device)
+            return torch.zeros((len(obs), 1), device=obs.device)
+        policy = types.SimpleNamespace(device=torch.device("cpu"), eval=Mock(), get_v=get_v)
+        utils.plot_value(policy, "unused")
+        self.assertEqual(observed_devices, [policy.device])
+        pyplot.savefig.assert_called_once_with("unused.png", bbox_inches="tight")
+
+
 class ReplayBuffer:
     def __init__(self, *args, **kwargs):
         pass

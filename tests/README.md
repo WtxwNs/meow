@@ -18,6 +18,7 @@ Covered regressions:
 
 - Plotting cannot overwrite an improved evaluated `best.pt` with a worse policy,
   or create a best checkpoint before evaluation; the last checkpoint still saves.
+- Value plotting respects the policy device instead of requiring CUDA.
 - Automatic entropy tuning reaches both the online and target policies at startup
   and after optimizer updates; fixed-temperature behavior is unchanged.
 - Q and V use the current temperature.
