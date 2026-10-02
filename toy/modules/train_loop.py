@@ -72,7 +72,6 @@ def train_loop(agent, args, buffer, train_envs, test_envs, logger):
                 figdir = os.path.join(args.save_path, 'figures', str(t))
                 _, _ = plot_traj_multigoal(agent.policy, figdir+'_traj')
                 plot_value(agent.policy, figdir+'_value')
-                torch.save(agent.policy, os.path.join(args.save_path, 'best.pt'))
         
         if terminated or truncated:
             best_train_return = max(best_train_return, episode_return)

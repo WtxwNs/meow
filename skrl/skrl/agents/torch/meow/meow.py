@@ -113,7 +113,7 @@ class MEow(Agent):
             # freeze target networks with respect to optimizers (update via .update_parameters())
             self.target_policy.freeze_parameters(True)
             # update target networks (hard update)
-            self.target_policy.update_parameters(self.target_policy, polyak=1)
+            self.target_policy.update_parameters(self.policy, polyak=1)
 
         # configuration
         self._gradient_steps = self.cfg["gradient_steps"]

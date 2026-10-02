@@ -17,7 +17,7 @@ This folder contains the code implementation of the toy experiments in Section 4
 # assume the current directory is the root of this repository
 docker run --rm -it --gpus all --ipc=host -v ${PWD}:/app nvcr.io/nvidia/pytorch:20.12-py3
 # inside the docker container, run:
-cd /app
+cd /app/toy
 ```
 
 - Install `conda`, create a conda envrionment `meow`, and activate it:
